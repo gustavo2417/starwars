@@ -9,6 +9,8 @@ function Header() {
     planetsFiltered,
     setPlanetsFiltered,
     numericFilters,
+    options,
+    setOptions,
   } = useContext(planetsContext);
 
   const handleChange = ({ target }) => {
@@ -36,6 +38,13 @@ function Header() {
         (planet) => Number(planet[column]) === Number(value),
       ));
     }
+    const newOptions = options.filter((filter) => filter !== column);
+    setOptions(newOptions);
+    setNumericFilters({
+      column: newOptions[0],
+      comparison: 'maior que',
+      value: 0,
+    });
   };
 
   return (
@@ -59,11 +68,8 @@ function Header() {
           data-testid="column-filter"
           onChange={ handleChanceFilters }
         >
-          <option value="population">population</option>
-          <option value="orbital_period">orbital_period</option>
-          <option value="diameter">diameter</option>
-          <option value="rotation_period">rotation_period</option>
-          <option value="surface_water">surface_water</option>
+          { options
+            .map((opt) => <option value={ opt } key={ opt }>{ opt }</option>)}
         </select>
         <select
           name="comparison"

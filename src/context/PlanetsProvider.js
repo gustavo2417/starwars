@@ -13,6 +13,13 @@ function PlanetsProvider({ children }) {
   });
   const [filter, setFilter] = useState({});
   const [mudar, PodeMudar] = useState(false);
+  const [options, setOptions] = useState([
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water',
+  ]);
 
   const contextPlanets = {
     filterByName,
@@ -26,6 +33,8 @@ function PlanetsProvider({ children }) {
     PodeMudar,
     planetsFiltered,
     setPlanetsFiltered,
+    options,
+    setOptions,
   };
 
   useEffect(() => {
